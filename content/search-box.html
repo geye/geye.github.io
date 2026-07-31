@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<style>
+
+	/* 1. 定义默认（亮色）变量 */
+:root {
+    /* --- 核心背景设置 --- */
+    --bg-color: transparent;      /* 页面背景改为透明 */
+    --input-bg: transparent;      /* 输入框背景改为透明 */
+    --sb-bg-color: transparent;   /* 统一使用这个变量控制搜索框背景 */
+
+    /* --- 文字颜色设置 (关键修改) --- */
+    --text-color: #808080;        /* 搜索框输入文字和引擎名称的颜色深灰808080 */
+    --sb-text-color: #808080;     /* 保持808080主文字一致 */
+    --placeholder-color: #9ca3af; /* 占位符颜色：浅灰 */
+
+    /* --- 边框与阴影 --- */
+    --border-color: #90EE90;      /* 浅绿，边框颜色：浅灰e2e8f0，保证轮廓可见 */
+    --shadow-color: rgba(0,0,0,0.05);	/* 默认阴影颜色 */
+    --shadow-focus-color: rgba(59, 130, 246, 0.15);		/* 聚焦时的阴影颜色 */
+
+    /* --- 下拉框/热词区域设置 --- */
+    /* 背景给一点半透明白，防止纯透明导致文字和网页内容混在一起 */
+    --suggestion-bg: transparent; 	/* rgba(255, 255, 255, 0.9) 	下拉框热词推荐*/
+    --suggestion-hover-bg: transparent;	/* #eff6ff 	鼠标悬停时的背景色rgba(255, 255, 255, 0.1) */
+    
+    /* 文字必须是深色，否则在白底下看不见 */
+    --suggestion-text: #808080;       /* 热词默认文字颜色 */
+    --suggestion-active-text: #8B0000; 		/* 深红色 选中/激活时的文字颜色 */
+
+    /* --- 图标与其他 --- */
+    --icon-color: #9ca3af;		/* 图标默认颜色 */
+    --icon-hover-color: #ef4444;	/*  图标悬停颜色 */
+    --delete-bg-hover: #fee2e2;		/* 清除X按钮悬停背景颜色 */
+}
+
+    /* === 核心样式 === */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+		/* 1. 核心背景与文字颜色 */
+        background-color: var(--sb-bg-color); 	/* 这里会自动读取 :root 或 body.dark 里的 transparent */
+        color: var(--sb-text-color);			/* 文字颜色跟随变量变化 */
+        transition: background-color 0.3s, color 0.3s;		/* 2. 优化过渡效果 (防止切换时闪烁) */
+		min-height: 100vh; 		/* 3. 确保高度占满，防止内容少时背景截断 */
+    }
+
+	/* 主搜索栏容器  */
+    .search-wrapper {
+        position: relative;		/*  相对定位 */
+        width: 100%;			/*  宽度 100% */
+        max-width: 700px;		/*  最大宽度 700px */
+        margin: 0 auto;			/*  水平居中 */
+        z-index: 1000;			/* 层叠顺序，控制这个搜索框在 Z 轴（垂直于屏幕的方向）上的“楼层高度”  */
+    }
+
+    /* 主搜索栏容器 - 胶囊形状 */
+    .search-bar {
+        display: flex;		/*  弹性布局 */
+        align-items: center;		/* 垂直居中  */
+        background: var(--input-bg); /* 背景颜色 修改：使用变量 */
+		backdrop-filter: blur(8px); /* 增加背景模糊效果 */
+        border: 1px solid var(--border-color); /* 边框修改：使用变量 */
+        border-radius: 50px;		/*  圆角 */
+        padding: 6px 15px;			/*  内边距 */
+        box-shadow: 0 4px 15px var(--shadow-color); /* 阴影修改：使用变量 */
+        transition: all 0.3s ease;		/*  过渡动画 */
+    }
+
+	/*  搜索框在“获得焦点（Focus）”时的特殊样式 */
+    .search-bar:focus-within {
+        box-shadow: 0 8px 25px var(--shadow-focus-color); /* 聚焦时的阴影修改：使用变量 */
+        border-color: #3b82f6;		/*  聚焦时的边框颜色 */
+    }
+
+    /* 搜索引擎选择器 */
+    .engine-select {
+        border: none;	/* 移除默认边框 */
+        background: transparent;	/* 背景透明，无填充色 */
+        font-weight: 600;	/* 字体加粗（600=半粗体） */
+        color: var(--text-color); 	/* 修改：--text-color强制 !important 使用变量 */
+        cursor: pointer;	/* 鼠标悬浮为手型，提示可点击 */
+        outline: none;	/* 移除点击/聚焦时的外边框高亮 */
+        padding-right: 10px;	/* 右内边距10px，防文字贴边 */
+        border-right: 1px solid var(--border-color); 	/* 修改：使用变量 *//* 右侧1px分隔线，用主题变量色 */
+        margin-right: 10px;	/* 右外边距10px，与右侧元素间距 */
+        font-size: 14px;	/* 字体大小14px */
+    }
+	
+
+    /* 输入框 */
+    .search-input {
+        flex: 1;
+        border: none;		/* 移除默认边框 */	
+        outline: none;		/* 移除点击/聚焦时的外边框高亮 */
+        font-size: 16px;	/* 字体大小16px */
+		font-weight: 300; /* 字体加粗（600=半粗体） */
+        color: var(--text-color) !important; 	/* 修改：--text-color强制 !important 使用变量 */
+        background: transparent;		/* 背景透明，无填充色 */
+    }
+	
+    .search-input::placeholder {
+        color: var(--placeholder-color); 	/* 新增：占位符颜色 */
+    }
+
+    /* 清空输入框按钮 */
+    .clear-input-btn {
+        cursor: pointer;
+        color: var(--icon-color); /* 修改：使用变量 */
+        padding: 5px;
+        display: none;
+        align-items: center;
+        transition: color 0.2s;
+    }
+
+    .clear-input-btn:hover {
+        color: var(--icon-hover-color); /* 修改：使用变量 */
+    }
+
+    /* 清空历史记录图标 */
+    .clear-history-btn {
+        cursor: pointer;
+        color: var(--icon-color); /* 修改：使用变量 */
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        transition: color 0.2s;
+    }
+
+    .clear-history-btn:hover {
+        color: var(--icon-hover-color); /* 修改：使用变量 */
+    }
+
+    /* 搜索按钮 */
+    .submit-btn {
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        padding: 8px 20px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: background 0.2s;
+    }
+
+	/* 搜索按钮（Submit Button）在鼠标悬停（Hover）时的样式  */
+    .submit-btn:hover {
+        background: #2563eb;
+    }
+
+    /* === 悬浮下拉框样式 === */
+    #global-suggestions {
+        position: fixed;
+        background: var(--suggestion-bg); /* 修改：使用变量 */
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: 0 10px 40px var(--shadow-color); /* 修改：使用变量 */
+        z-index: 99999;
+        display: none;
+        overflow: hidden;
+        border: 1px solid var(--border-color); /* 修改：使用变量 */
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+	/* 针对下拉框的自定义滚动条样式 */
+	#global-suggestions::-webkit-scrollbar {
+		width: 6px; /* 滚动条变细 */
+	}
+
+	#global-suggestions::-webkit-scrollbar-track {
+		background: transparent; /* 轨道完全透明 */
+	}
+
+	#global-suggestions::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.3); /* 滑块为半透明白色，融入毛玻璃效果 */
+		border-radius: 3px; /* 让滑块变圆润 */
+	}
+
+	#global-suggestions::-webkit-scrollbar-thumb:hover {
+		background: rgba(255, 255, 255, 0.5); /* 鼠标悬停时稍微亮一点 */
+	}
+
+
+    .suggestion-item {
+	padding: 1px 20px;		/* 热词推荐框词条间距,上下，左右 */
+        cursor: pointer;
+        font-size: 16px;
+        color: var(--suggestion-text); /* 修改：使用变量 */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background 0.2s, color 0.2s; /* 新增：颜色过渡 */
+    }
+
+    .suggestion-item:hover, .suggestion-item.active {
+        background: var(--suggestion-hover-bg); /* 修改：使用变量 */
+        color: var(--suggestion-active-text); /* 修改：使用变量 */
+    }
+
+    .suggestion-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+    }
+
+    .suggestion-icon {
+        font-size: 12px;
+        opacity: 0.5;
+    }
+
+    /* 单条删除按钮样式 */
+    .delete-item-btn {
+        cursor: pointer;
+        color: var(--icon-color); /* 修改：使用变量 */
+        padding: 4px;
+        border-radius: 4px;
+        opacity: 0;
+        transition: all 0.2s;
+    }
+
+    .delete-item-btn:hover {
+        color: var(--icon-hover-color); /* 修改：使用变量 */
+        background-color: var(--delete-bg-hover); /* 修改：使用变量 */
+    }
+
+    .suggestion-item:hover .delete-item-btn {
+        opacity: 1;
+    }
+	
+	
+</style>
+        
+		
+</head>
+<body>
+    <!-- 搜索组件结构 -->
+    <div class="search-wrapper" id="searchWrapper">
+        <div class="search-bar">
+            <select class="engine-select" id="engineSelect">
+                <option value="bing">Bing</option>
+                <option value="baidu">Baidu</option>
+                <option value="google">Google</option>
+            </select>
+            <input type="text" class="search-input" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off">
+            <!-- 清空输入框按钮 (新增) -->
+            <div class="clear-input-btn" id="clearInputBtn" title="清空输入">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </div>
+            <!-- 清空历史记录按钮 -->
+            <div class="clear-history-btn" id="clearHistoryBtn" title="清空全部历史">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </div>
+            <button class="submit-btn" onclick="performSearch()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> 搜索
+            </button>
+        </div>
+    </div>
+    <!-- 全局下拉框容器 -->
+    <div id="global-suggestions"></div>
+
+    <script>
+        const input = document.getElementById('searchInput');
+        const suggestionsBox = document.getElementById('global-suggestions');
+        const wrapper = document.getElementById('searchWrapper');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        const clearInputBtn = document.getElementById('clearInputBtn'); // 新增：获取清空输入按钮元素
+
+        // 历史记录存储
+        let history = JSON.parse(localStorage.getItem('mySearchHistory')) || [];
+
+        // 监听输入
+        input.addEventListener('input', function(e) {
+            const val = e.target.value.trim();
+            // 控制清空输入按钮的显示与隐藏
+            clearInputBtn.style.display = val ? 'flex' : 'none';
+            
+            if (!val) {
+                hideSuggestions();
+                return;
+            }
+            // 获取建议并显示
+            fetchSuggestions(val).then(list => {
+                renderSuggestions(list);
+                positionDropdown();
+            });
+        });
+
+        // 聚焦时也显示（如果有内容）
+        input.addEventListener('focus', function() {
+            if(input.value.trim()) {
+                fetchSuggestions(input.value.trim()).then(renderSuggestions);
+                positionDropdown();
+            }
+        });
+
+        // 点击外部关闭
+        document.addEventListener('click', function(e) {
+            if (!wrapper.contains(e.target) && !suggestionsBox.contains(e.target)) {
+                hideSuggestions();
+            }
+        });
+
+        // 窗口滚动或缩放时重新定位
+        window.addEventListener('scroll', hideSuggestions);
+        window.addEventListener('resize', () => {
+            if(suggestionsBox.style.display === 'block') positionDropdown();
+        });
+
+        // 核心功能：获取热词
+        async function fetchSuggestions(query) {
+            try {
+                return await new Promise((resolve) => {
+                    const script = document.createElement('script');
+                    script.src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${encodeURIComponent(query)}&cb=handleBaiduSuggestion`;
+                    window.handleBaiduSuggestion = (data) => {
+                        const list = data.s || [];
+                        const localHits = history.filter(h => h.includes(query) && !list.includes(h));
+                        resolve([...list, ...localHits].slice(0, 8));
+                        cleanup();
+                    };
+                    const cleanup = () => {
+                        document.body.removeChild(script);
+                        delete window.handleBaiduSuggestion;
+                        setTimeout(() => {
+                            if(typeof window.handleBaiduSuggestion === 'function') resolve(history.filter(h=>h.includes(query)).slice(0,5));
+                        }, 2000);
+                    };
+                    document.body.appendChild(script);
+                });
+            } catch (e) {
+                return history.filter(h => h.includes(query)).slice(0, 5);
+            }
+        }
+
+        // 渲染下拉列表 (修改：增加删除按钮)
+        function renderSuggestions(list) {
+            if (list.length === 0) {
+                hideSuggestions();
+                return;
+            }
+            suggestionsBox.innerHTML = list.map(item => `
+                <div class="suggestion-item" onclick="selectSuggestion('${item}')">
+                    <div class="suggestion-content">
+                        <span class="suggestion-icon">🔍</span>
+                        ${item}
+                    </div>
+                    <div class="delete-item-btn" onclick="deleteHistoryItem('${item}')" title="删除此条记录">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </div>
+                </div>
+            `).join('');
+            suggestionsBox.style.display = 'block';
+            positionDropdown();
+        }
+
+        // 动态计算位置
+        function positionDropdown() {
+            const rect = wrapper.getBoundingClientRect();
+            suggestionsBox.style.width = rect.width + 'px';
+            suggestionsBox.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+            suggestionsBox.style.left = rect.left + 'px';
+        }
+
+        function hideSuggestions() {
+            suggestionsBox.style.display = 'none';
+        }
+
+        // 选中词条
+        window.selectSuggestion = function(text) {
+            input.value = text;
+            saveHistory(text);
+            performSearch();
+            hideSuggestions();
+        }
+
+        // 执行搜索
+        window.performSearch = function() {
+            const query = input.value.trim();
+            if (!query) return;
+            saveHistory(query);
+            const engine = document.getElementById('engineSelect').value;
+            let url = '';
+            switch(engine) {
+                case 'baidu': url = `https://www.baidu.com/s?wd=${encodeURIComponent(query)}`; break;
+                case 'google': url = `https://www.google.com/search?q=${encodeURIComponent(query)}`; break;
+                default: url = `https://cn.bing.com/search?q=${encodeURIComponent(query)}`;
+            }
+            window.open(url, '_blank');
+        }
+
+        // 保存历史
+        function saveHistory(text) {
+            history = [text, ...history.filter(h => h !== text)].slice(0, 20);
+            localStorage.setItem('mySearchHistory', JSON.stringify(history));
+        }
+
+        // 删除单条历史 (新增功能)
+        window.deleteHistoryItem = function(text) {
+            // 阻止事件冒泡，防止触发选中词条
+            event.stopPropagation();
+            history = history.filter(h => h !== text);
+            localStorage.setItem('mySearchHistory', JSON.stringify(history));
+            // 重新渲染列表，不关闭弹窗
+            if(input.value.trim()) {
+                fetchSuggestions(input.value.trim()).then(renderSuggestions);
+            }
+        }
+
+        // 清空全部历史 (修改：移除弹窗提示)
+        clearHistoryBtn.addEventListener('click', () => {
+            localStorage.removeItem('mySearchHistory');
+            history = [];
+            input.focus();
+            hideSuggestions(); // 清空后隐藏列表
+        });
+
+        // 清空输入框内容 (新增功能)
+        clearInputBtn.addEventListener('click', () => {
+            input.value = '';
+            clearInputBtn.style.display = 'none'; // 隐藏按钮
+            input.focus();
+            hideSuggestions();
+        });
+
+        // 回车搜索
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+    </script>
+
+</body>
+</html>

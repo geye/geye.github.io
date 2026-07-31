@@ -1,0 +1,60 @@
+name: Deploy Quartz site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master # 如果你的主分支叫 main，请改为 main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for git info
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22 # Quartz 推荐使用 Node.js 22+
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build Quartz
+        run: npx quartz build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4 # 👈 这里已升级为 v4
+        with:
+          path: public
+          retention-days: 1
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4 # 👈 这里已升级为 v4
+        with:
+          name: artifact
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: . # 上传当前目录（即刚才下载的 artifact）
+      - name: Deploy to GitHub Pages
+        id: deployment
+<<<<<<< HEAD
+        uses: actions/deploy-pages@v4
+=======
+        uses: actions/deploy-pages@v4
+>>>>>>> origin/master

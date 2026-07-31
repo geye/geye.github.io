@@ -1,0 +1,49 @@
+@use "./base.scss";
+/* 侧边外层滚动条 */
+.right.sidebar::-webkit-scrollbar {
+  width: 16px !important;
+}
+.right.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.right.sidebar::-webkit-scrollbar-thumb {
+  background-color: #bbbbbb;
+  border-radius: 6px;
+}
+
+/* 保障折叠按钮点击 */
+.right .toc-header {
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 20;
+}
+
+/* 目录flex布局 */
+.right .toc {
+  max-height: 60vh; /* 微调：30~36之间调试，数值越小反向链接空间越大,逐个测试 */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+.right .toc .toc-header {
+  flex-shrink: 0;
+}
+.right ul.toc-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: unset !important;
+  padding-bottom: 8px;
+}
+
+/* =====核心：反向链接强制保底高度===== */
+.right .backlinks {
+  min-height: 32vh; /* 重点！强制预留最少高度 */
+}
+
+/* 图谱下方增加间距，进一步释放垂直空间 */
+.right .graph {
+  margin-bottom: 1.4rem;
+
+}
+// put your custom CSS here!
+
