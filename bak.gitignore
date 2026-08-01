@@ -1,0 +1,130 @@
+.DS_Store
+.gitignore
+node_modules
+public
+prof
+tsconfig.tsbuildinfo
+.obsidian
+.quartz-cache
+private/
+.replit
+replit.nix
+#必须添加到 .gitignore的忽略文件，存放 API Keys、Database URL、Tokens 最常见的地方
+.env
+.env.local
+.env.*.local
+.npmrc
+*.tsbuildinfo
+
+## ==========【最高优先级：隐私&密钥文件！严禁提交】==========
+# 环境变量（存放数据库密码、token、API密钥，重中之重）
+.env
+.env.local
+.env.dev
+.env.prod
+.env.*
+!.env.example    # 允许上传空模板.env示例（不带真实密码）
+
+# 各类私钥、证书、ssh密钥
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa
+*.secret
+secrets/
+secret/
+
+# 数据库本地文件
+*.sqlite
+*.sqlite3
+*.db
+*.mdb
+*.accdb
+
+# 配置文件（带本地账号密码）
+config.local.js
+config.local.json
+local-config.yaml
+settings.local.toml
+
+# 缓存凭证、token文件
+*.token
+credentials.json
+
+## ========== 操作系统自带垃圾文件 ==========
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+## ========== Git 自身临时文件（一般不用写，保险加上）==========
+.git/**/*.lock
+
+## ========== IDE编辑器缓存文件（你使用Mingw / VSCode推荐）==========
+# VSCode
+.vscode/
+!.vscode/settings.json      # 可选：如果团队统一配置可以保留
+!.vscode/tasks.json
+*.code-workspace
+
+# JetBrains系列（IDEA、CLion、PyCharm）
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+## ========== 编译、运行产物，二进制程序 ==========
+# 可执行文件
+*.exe
+*.out
+*.bin
+*.dll
+*.so
+*.dylib
+
+# 压缩包
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+## ========== 日志文件、临时文件 ==========
+*.log
+logs/
+log/
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*~
+
+## ========== 前端/后端常见依赖（按需开启）==========
+# Node项目
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# C/C++ 构建目录
+build/
+dist/
+cmake-build-*/

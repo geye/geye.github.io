@@ -53,8 +53,5 @@ jobs:
           path: . # 上传当前目录（即刚才下载的 artifact）
       - name: Deploy to GitHub Pages
         id: deployment
-<<<<<<< HEAD
         uses: actions/deploy-pages@v4
-=======
-        uses: actions/deploy-pages@v4
->>>>>>> origin/master
+
