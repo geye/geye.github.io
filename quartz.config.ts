@@ -11,6 +11,7 @@ const config: QuartzConfig = {
     pageTitle: "魔客室",
     pageTitleSuffix: "",
     enableSPA: true,
+	trailingSlash:true,
     enablePopovers: true,
     analytics: {
       provider: "plausible",
