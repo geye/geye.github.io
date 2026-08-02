@@ -115,7 +115,7 @@ tags:
 
 <div class="nav-card" style="position: relative; width: 100%; height: 333px; margin-top: 20px;">
     <iframe 
-        src="/search-box.html" 
+        src="/static/search-box.html" 
         style="width: 100%; height: 100%; border: none; overflow: hidden;" 
         scrolling="no">
     </iframe>
