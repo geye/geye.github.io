@@ -6,6 +6,22 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [],
+  // ========== 在这里插入全局JS脚本 ==========
+  afterBody: [
+    Component.RawHtml(`
+<script>
+document.addEventListener('nav', function () {
+  const path = window.location.pathname
+  const basePrefix = "/z"
+  // 规则：目录路径，非html文件，不是首页，末尾无斜杠则自动补齐
+  if (path.startsWith(basePrefix) && !path.includes('.html') && path !== basePrefix + "/" && !path.endsWith("/")) {
+    window.location.pathname = path + "/"
+  }
+})
+</script>
+    `),
+  ],
+  
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/jackyzha0/quartz",
