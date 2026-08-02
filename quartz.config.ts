@@ -11,13 +11,12 @@ const config: QuartzConfig = {
     pageTitle: "魔客室",
     pageTitleSuffix: "",
     enableSPA: true,
-	trailingSlash:true,
     enablePopovers: true,
     analytics: {
       provider: "plausible",
     },
     locale: "zh-CN",
-    baseUrl: "/z/",
+    baseUrl: "mocoss.github.io/z",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
