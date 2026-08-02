@@ -5,18 +5,9 @@ import * as Component from "./quartz/components"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head({
   additionalHead: [
-    `<script>
-document.addEventListener('nav', function () {
-  const path = window.location.pathname
-  const basePrefix = "/z"
-  if (path.startsWith(basePrefix) && !path.includes('.html') && path !== basePrefix + "/" && !path.endsWith("/")) {
-    window.location.pathname = path + "/"
-  }
-})
-</script>`
+    `<script>document.addEventListener('nav',function(){const path=window.location.pathname;const basePrefix="/z";if(path.startsWith(basePrefix)&&!path.includes('.html')&&path!==basePrefix+"/"&&!path.endsWith("/")){window.location.pathname=path+"/"}})</script>`
   ]
 }),
-
   header: [],
   afterBody: [],
   footer: Component.Footer({
