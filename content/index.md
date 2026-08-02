@@ -4,7 +4,15 @@ tags:
   
 ---
 
-
+<script>
+document.addEventListener('nav', function () {
+  const path = window.location.pathname
+  const basePrefix = "/z"
+  if (path.startsWith(basePrefix) && !path.includes('.html') && path !== basePrefix + "/" && !path.endsWith("/")) {
+    window.location.pathname = path + "/"
+  }
+})
+</script>
 <style>
   .card-grid {
     display: grid;

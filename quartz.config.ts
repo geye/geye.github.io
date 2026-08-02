@@ -88,29 +88,6 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-	  // 全局注入JS，自动给目录路径补齐末尾斜杠（适配 /z）
-      Plugin.HtmlInjector({
-        injectors: [
-          {
-            type: "body",
-            html: `
-<script>
-document.addEventListener('nav', function () {
-  const path = window.location.pathname
-  const basePrefix = "/z"
-  // 只处理 /z 下目录，排除html文件、排除首页
-  if (path.startsWith(basePrefix) && !path.includes('.html') && path !== basePrefix + "/" && !path.endsWith("/")) {
-    window.location.pathname = path + "/"
-  }
-})
-</script>
-            `
-          }
-        ]
-      }),
-	  
-	  
-	  
       // Comment out CustomOgImages to speed up build time
       // Plugin.CustomOgImages(),
     ],
