@@ -567,4 +567,4 @@ ESTABLISHED → FIN_WAIT_1 → CLOSING → TIME_WAIT → CLOSED
 
 ---
 
-#三次握手
+#三次握手 
