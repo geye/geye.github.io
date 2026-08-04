@@ -421,4 +421,4 @@ int s = socket(AF_ROUTE, SOCK_RAW, 0);
 
 ---
 
-#TCP/IP #卷2 #实现 #选路套接字 #routing socket #AF_ROUTE #rt_msghdr #选路消息 #内核
+#选路套接字

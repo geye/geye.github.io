@@ -408,4 +408,4 @@ struct in_multi {
 
 ---
 
-#TCP/IP #卷2 #实现 #IP多播 #IGMP #组管理 #多播 #组成员 #内核
+#IP多播 #IGMP

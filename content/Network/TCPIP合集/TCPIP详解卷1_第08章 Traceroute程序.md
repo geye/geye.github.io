@@ -434,4 +434,4 @@ traceroute to www.baidu.com (110.242.68.3), 30 hops max, 60 byte packets
 
 ---
 
-#TCP/IP #卷1 #协议 #Traceroute #路由追踪 #TTL #ICMP超时 #网络工具 #路径诊断
+#Traceroute

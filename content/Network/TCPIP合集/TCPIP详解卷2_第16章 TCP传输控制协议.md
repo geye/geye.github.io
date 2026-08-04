@@ -541,4 +541,4 @@ struct tcpcb {
 
 ---
 
-#TCP/IP #卷2 #实现 #TCP #传输控制协议 #tcpcb #状态机 #tcp_input #tcp_output #内核
+#TCP #传输控制协议

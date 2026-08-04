@@ -538,4 +538,4 @@ ICMP重定向（Redirect）：
 
 ---
 
-#TCP/IP #卷2 #实现 #IP选路 #选路表 #rtentry #最长匹配 #IP转发 #重定向 #内核
+#IP选路

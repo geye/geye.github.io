@@ -514,4 +514,4 @@
 
 ---
 
-#TCP/IP #卷1 #协议 #Telnet #Rlogin #远程登录 #选项协商 #NVT #网络虚拟终端
+#Telnet Rlogin

@@ -567,4 +567,4 @@ ESTABLISHED → FIN_WAIT_1 → CLOSING → TIME_WAIT → CLOSED
 
 ---
 
-#TCP/IP #卷2 #实现 #TCP #连接建立 #连接终止 #三次握手 #四次挥手 #状态机 #TIME_WAIT #RST #内核
+#三次握手 #四次挥手

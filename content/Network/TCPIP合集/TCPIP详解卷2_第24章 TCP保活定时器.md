@@ -465,4 +465,4 @@ setsockopt(sock, SOL_SOCKET, SO_KEEPALIVE, &keepalive, sizeof(keepalive));
 
 ---
 
-#TCP/IP #卷2 #实现 #TCP #保活定时器 #keepalive #保活探查 #死连接 #内核
+#keepalive #保活

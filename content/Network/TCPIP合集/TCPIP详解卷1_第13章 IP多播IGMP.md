@@ -482,4 +482,4 @@
 
 ---
 
-#TCP/IP #卷1 #协议 #IGMP #组管理协议 #多播 #组成员 #IGMPv1 #IGMPv2 #IGMPv3
+#IGMP多播

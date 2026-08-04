@@ -549,4 +549,4 @@ RTO = SRTT + 4 × RTTVAR
 
 ---
 
-#TCP/IP #卷2 #实现 #TCP #定时器 #重传定时器 #坚持定时器 #保活定时器 #2MSL #RTT #RTO #内核
+#定时器

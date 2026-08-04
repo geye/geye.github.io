@@ -509,4 +509,4 @@ setsockopt(sockfd, IPPROTO_TCP, TCP_KEEPALIVE, &keepalive_time, sizeof(keepalive
 
 ---
 
-#TCP/IP #卷2 #实现 #TCP #插口选项 #setsockopt #getsockopt #TCP_NODELAY #TCP_MAXSEG #TCP_KEEPALIVE #内核
+#插口选项

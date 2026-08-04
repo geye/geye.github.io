@@ -505,4 +505,4 @@ struct ip {
 
 ---
 
-#TCP/IP #卷2 #实现 #IP #网际协议 #ip_input #ip_output #ip_forward #内核
+#网际协议

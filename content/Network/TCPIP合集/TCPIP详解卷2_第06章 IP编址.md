@@ -346,4 +346,4 @@ ifaof_ifpforaddr(addr, ifp)
 
 ---
 
-#TCP/IP #卷2 #实现 #IP编址 #in_ifaddr #字节序 #多播 #地址查找 #内核
+#IP编址 #in_ifaddr

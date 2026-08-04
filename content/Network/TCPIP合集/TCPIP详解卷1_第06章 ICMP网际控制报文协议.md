@@ -501,4 +501,4 @@
 
 ---
 
-#TCP/IP #卷1 #协议 #ICMP #网际控制报文协议 #ping #traceroute #差错报文 #查询报文
+#ICMP网际控制报文协议

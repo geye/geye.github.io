@@ -479,4 +479,4 @@
 
 ---
 
-#TCP/IP #卷1 #协议 #TCP #保活定时器 #keepalive #存活检测 #心跳
+#TCP keepalive

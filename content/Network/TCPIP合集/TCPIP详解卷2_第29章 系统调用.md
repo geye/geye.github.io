@@ -658,4 +658,4 @@ int shutdown(int s, int how);
 
 ---
 
-#TCP/IP #卷2 #实现 #系统调用 #socket #bind #listen #accept #connect #send #recv #内核
+#系统调用

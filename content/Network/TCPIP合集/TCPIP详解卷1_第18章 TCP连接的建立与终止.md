@@ -530,4 +530,4 @@ CLOSED → LISTEN → SYN_RCVD → ESTABLISHED → CLOSE_WAIT → LAST_ACK → C
 
 ---
 
-#TCP/IP #卷1 #协议 #TCP #连接建立 #连接终止 #三次握手 #四次挥手 #状态机 #TIME_WAIT #RST
+#TCP传输控制协议

@@ -536,4 +536,4 @@ ping -t 2 目标地址
 
 ---
 
-#TCP/IP #卷1 #协议 #Ping #ICMP #回显 #RTT #记录路由 #时间戳 #网络工具
+#Ping

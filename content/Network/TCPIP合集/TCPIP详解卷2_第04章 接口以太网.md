@@ -589,4 +589,4 @@ struct ifnet {
 
 ---
 
-#TCP/IP #卷2 #实现 #以太网 #接口 #LANCE #驱动 #内核 #网络接口
+#以太网接口 #LANCE

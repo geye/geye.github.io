@@ -443,4 +443,4 @@ ICMP（Internet Control Message Protocol）：
 
 ---
 
-#TCP/IP #卷2 #实现 #ICMP #控制报文协议 #icmp_input #icmp_error #内核
+#ICMP #控制报文协议
