@@ -1,4 +1,3 @@
-```markdown
 ---
 title: 第13章 IGMP：Internet组管理协议
 ---
