@@ -3,7 +3,6 @@
 
 ## 2. GitHub 首页说明 (`00-README.md`)
 
-```markdown
 # TCP/IP详解 · 学习笔记
 
 本仓库是对《TCP/IP详解》卷1和卷2的系统性整理，采用 Obsidian 风格的 Markdown 格式，支持知识图谱和双向链接。
