@@ -26,24 +26,27 @@ struct igmp {
     u_short igmp_cksum;
     struct in_addr igmp_group;
 };
+```
+
 报文类型
 类型	说明
 0x11	成员关系查询
 0x12	成员关系报告
 0x13	DVMRP
-13.4 IGMP的protosw结构
+
+## 13.4 IGMP的protosw结构
 类型：SOCK_RAW
 
 协议：IPPROTO_IGMP（2）
 
 输入：igmp_input
 
-13.5 加入组：igmp_joingroup
+## 13.5 加入组：igmp_joingroup
 发送成员报告
 
 设置随机定时器
 
-13.6 igmp_fasttimo函数
+## 13.6 igmp_fasttimo函数
 每秒调用5次
 
 递减组定时器
@@ -55,7 +58,7 @@ igmp_sendreport
 
 发送到多播组
 
-13.7 输入处理：igmp_input
+## 13.7 输入处理：igmp_input
 查询处理
 设置随机延迟
 
@@ -66,10 +69,10 @@ igmp_sendreport
 
 避免重复报告
 
-13.8 离开组：igmp_leavegroup
+## 13.8 离开组：igmp_leavegroup
 不发送离开通知
 
 下次查询时不再报告
 
-13.9 小结
+## 13.9 小结
 IGMP管理多播组成员，使用查询/报告机制。报告延迟减少网络负载。

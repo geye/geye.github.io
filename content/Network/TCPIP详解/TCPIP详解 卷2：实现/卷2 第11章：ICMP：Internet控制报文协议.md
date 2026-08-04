@@ -24,14 +24,16 @@ struct icmp {
         // 各种类型专用
     } icmp_hun;
 };
-11.4 ICMP的protosw结构
+```
+
+## 11.4 ICMP的protosw结构
 类型：SOCK_RAW
 
 协议：IPPROTO_ICMP（1）
 
 输入：icmp_input
 
-11.5 输入处理：icmp_input函数
+## 11.5 输入处理：icmp_input函数
 验证步骤
 验证长度
 
@@ -51,7 +53,7 @@ struct icmp {
 
 地址掩码：检查配置
 
-11.6 重定向处理
+## 11.6 重定向处理
 更新路由表
 
 通知所有协议
@@ -63,7 +65,7 @@ icmp_redirect处理
 
 更新网关
 
-11.7 输出处理
+## 11.7 输出处理
 icmp_error函数
 构造ICMP差错
 
@@ -78,5 +80,5 @@ icmp_reflect函数
 
 发送应答
 
-11.8 小结
+## 11.8 小结
 ICMP处理差错和查询报文。内核处理回显、时间戳和地址掩码请求。

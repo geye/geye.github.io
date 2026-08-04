@@ -20,7 +20,9 @@ mbuf（memory buffer）是内核中的存储器缓存，用于：
 ### 统计量
 ```bash
 netstat -m
-2.3 mbuf的定义
+```
+
+## 2.3 mbuf的定义
 常量
 常量	值	说明
 MSIZE	128	mbuf大小
@@ -28,7 +30,9 @@ MLEN	108	普通mbuf数据量
 MHLEN	100	分组首部mbuf数据量
 MINCLSIZE	208	簇最小数据量
 MCLBYTES	2048	簇大小
-2.4 mbuf结构
+
+
+## 2.4 mbuf结构
 四种mbuf类型
 无标志：108字节数据
 
@@ -52,7 +56,9 @@ M_BCAST	链路层广播
 M_MCAST	链路层多播
 M_EXT	有簇
 M_PKTHDR	分组首部
-2.5 简单的mbuf宏和函数
+
+
+## 2.5 简单的mbuf宏和函数
 m_get函数
 分配一个mbuf。
 
@@ -68,7 +74,7 @@ m_retry函数
 
 调用m_reclaim释放内存
 
-2.6 m_devget和m_pullup函数
+## 2.6 m_devget和m_pullup函数
 m_devget
 设备驱动程序创建mbuf链
 
@@ -81,7 +87,7 @@ m_pullup
 
 用于IP分片重装
 
-2.7 mbuf宏和函数的小结
+## 2.7 mbuf宏和函数的小结
 常用宏
 宏	说明
 MGET	分配mbuf
@@ -96,7 +102,9 @@ m_cat	连接mbuf链
 m_copy	复制mbuf链
 m_copydata	复制数据
 m_pullup	保证连续
-2.8 Net/3联网数据结构小结
+
+
+## 2.8 Net/3联网数据结构小结
 mbuf链：通过m_next链接
 
 有头指针的链表：通过m_nextpkt链接记录
@@ -105,17 +113,17 @@ mbuf链：通过m_next链接
 
 双向循环链表
 
-2.9 m_copy和簇引用计数
+## 2.9 m_copy和簇引用计数
 簇可被多个mbuf共享
 
 引用计数管理
 
 避免数据复制
 
-2.10 其他选择
+## 2.10 其他选择
 mbuf复杂性是历史产物
 
 现代系统可能使用更简单的缓存机制
 
-2.11 小结
+## 2.11 小结
 mbuf是Net/3网络代码的基础数据结构，支持可变长度数据和高效操作。
