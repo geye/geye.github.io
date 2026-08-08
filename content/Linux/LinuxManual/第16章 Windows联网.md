@@ -216,4 +216,4 @@ sudo systemctl start smbd
 
 ---
 
-#Linux #Shell #Samba #Windows共享 #SMB #CIFS #smbclient #nmblookup
+

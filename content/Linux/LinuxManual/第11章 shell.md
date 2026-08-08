@@ -197,4 +197,4 @@ alias gp='git push'
 
 ---
 
-#Linux #Shell #历史命令 #别名 #alias #history #效率
+
