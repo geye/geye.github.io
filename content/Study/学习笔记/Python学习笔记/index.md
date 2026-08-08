@@ -1,5 +1,5 @@
 ---
-title: 🐍 Python 学习笔记（完整版）
+title: Python 🐍 学习笔记（完整版）
 ---
 
 ---
