@@ -10,13 +10,13 @@ const config: QuartzConfig = {
   configuration: {
     pageTitle: "魔客室",
     pageTitleSuffix: "",
-    enableSPA: true,    //  /* #根仓库测试 */
+    enableSPA: true,   
     enablePopovers: true,
     analytics: {
       provider: "plausible",
     },
     locale: "zh-CN",
-    baseUrl: "/",  //  /* #根仓库测试  */
+    baseUrl: "/",  
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
