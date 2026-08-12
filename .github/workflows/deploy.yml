@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     # env:
-      # BASE_URL: "/z"    # ========== 新增这一段 env 配置 ==========
+      # BASE_URL: "/"    # ========== 新增这一段 env 配置 ==========
     steps:
       - uses: actions/checkout@v4
         with:
