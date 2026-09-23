@@ -20,10 +20,10 @@ jobs:
     # env:
       # BASE_URL: "/"    # ========== 新增这一段 env 配置 ==========
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # Fetch all history for git info
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22 # Quartz 推荐使用 Node.js 22+
       - name: Install Dependencies
@@ -31,7 +31,7 @@ jobs:
       - name: Build Quartz
         run: npx quartz build
       - name: Upload artifact
-        uses: actions/upload-artifact@v4 # 👈 这里已升级为 v4
+        uses: actions/upload-artifact@v7 # 👈 这里已升级为 v4
         with:
           path: public
           retention-days: 1
@@ -44,16 +44,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4 # 👈 这里已升级为 v4
+        uses: actions/download-artifact@v8 # 👈 这里已升级为 v4
         with:
           name: artifact
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: . # 上传当前目录（即刚才下载的 artifact）
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
